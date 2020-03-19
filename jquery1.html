@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Jquery Practice</title>
+
+    <style>
+    .addClass{
+        background-color: skyblue;
+        padding:15px;
+        border-radius:8px;
+        text-align:center;
+    }
+    .random{
+        background-color: antiquewhite;
+        padding:14px;
+        border-radius:20px;
+        font-size:18px;
+    }
+    /* issue to be solved */
+    .syntax::selection{
+        background-color:aqua;
+    }
+    </style>
+
+</head>
+<body style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin:0 10%">
+    <h1>jQuery Practice :Write Less Do More..</h1>
+    <h3>Basic Syntax :</h3>
+      <p class="syntax"> $(document).ready(function(){
+            //statements...
+        });
+ <br><br>
+        $(function(){
+            //statements...
+        });
+    </p>
+
+ <br><hr><br>
+<input type="text" name="inp" class="inp" id="inp">
+
+<br><br><hr><br>
+
+ <!-- Use of Get methods -->
+<h3>Get Methods :</h3>
+<ul class="items">
+    <li>html()</li>  <button class="htmlbtn"> <span>html()</span></button>
+    <li>text()</li>   <button class="textbtn">text()</button>  
+    <li>val()</li>   <button class="valbtn">val()</button>
+    <li>attr()</li> <button class="attrbtn">attr()</button>
+    <li class="replaced"></li>
+</ul>
+<br><hr><br>
+
+<!-- Use of addClass() and removeClass() -->
+<button class="addClassbtn">addClass()</button>
+<button class="removeClassbtn">removeClass()</button>
+<button class="toggleClassbtn">toggleClass()</button>
+
+<br><hr><br>
+
+<!-- To apple Inline CSS using jquery  -->
+<div class="testBox">
+    <h4>Hey ! I am the heading..</h4>         <!-- Set a class using addClass() method or attr() set method -->
+    <p class="paragraph">
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reprehenderit ratione exercitationem quo quisquam, enim alias minus accusantium aperiam molestiae deserunt magnam voluptatibus voluptas voluptatem sed dolorem voluptate, impedit eos placeat quidem ipsum voluptatum? Nemo totam omnis consequatur reiciendis cumque atque vero porro eos dolorum blanditiis asperiores odio laudantium incidunt deserunt iste voluptatum, officia ipsum non quasi rerum. Id, est quibusdam.
+    </p>
+</div>
+<br><hr><br>
+
+ <!-- Width and height methods -->
+<button class="widthbtn">Calculate Width</button><input type="text" name="w" id="w"><br>
+<button class="heightbtn">Calculate height</button><input type="text" name="h" id="h"><br>
+
+
+
+
+
+  <script src="js/jquery.js"></script>
+  <script>
+  $(document).ready(function(){
+        $('.htmlbtn').click(function(){
+            console.clear();
+            var a=$(".htmlbtn").html();
+            console.log(a);
+        });
+
+        $('.textbtn').click(function(){
+            console.clear();
+            var a=$(".htmlbtn").text();
+            console.log(a);
+        });
+
+        $('.valbtn').click(function(){
+            var input=$("#inp").val();
+            alert("Hello "+input);
+        });
+
+        $('.attrbtn').click(function(){
+            var get_attr=$("#inp").attr('name');
+           console.log(get_attr);
+        });
+
+        $('.addClassbtn').click(function(){
+           $("h1").addClass('addClass');
+        });
+
+        $('.removeClassbtn').click(function(){
+           $("h1").removeClass('addClass');
+        });
+
+        $('.toggleClassbtn').click(function(){
+           $("h1").toggleClass('addClass');
+        });
+
+        // $("h4").attr('class','heading');     syntax :To set a attribute(Another method to set)
+        $("h4").addClass("heading");   
+
+//Note : Fpr multiple enteries , use syntax that i have written below . For only one property , we use like: .css("backgroundColor","red");
+        $(".testBox").css({"border" : "2px solid black", //using .css method
+                            "backgroundColor":"tan",
+                            "padding":"15px",
+                            "font-size":"18px",
+                            "margin":"2% 20%"});
+    
+        $('#inp').on('click',function(){
+            alert("Please provide this input.");
+        });
+
+        $("#inp").on('select',function(){
+            alert("Your are selecting this input.");
+        });
+
+        $("#inp").off();
+
+        $(".testBox").append("<q>I was appended.</q><br>");
+        $(".testBox").prepend("<q>I was prepended.</q>");
+
+        $("<q>I was appended by appendTo().</q><br>").appendTo('.testBox');
+        $("<q>I was prepended by prependTo().</q><br>").prependTo(".testBox");
+
+        $('.testBox').after("This text has been added through after() method.");
+        $('.testBox').before("This text has been added through before() method.");
+
+        // $('.testBox').empty();        To make the div empty
+        // $('.testBox').remove();
+
+        $('h4').clone().appendTo('.items');     //Used clone method
+
+        $('.replaced').replaceWith("<li>I'm replaced with replaceWith()</li>");
+        // $('<li>we are all replaced</li>').replaceAll('li');  Usage of replaceAll()
+
+//------------- Wrap methods
+        $('.addClassbtn,.removeClassbtn,.toggleClassbtn').wrap('<div></div>');
+        $('.addClassbtn').unwrap();
+        $('.items').wrapAll('<div class="random"></div>');//Another way to add a class through div.
+        $('h1').wrapInner('<span class="addClass"></span>');
+
+    $('.widthbtn').on('click',function(){
+        // var width=$(".testBox").width();
+        // $("#w").html("");
+        // $("#w").append("width is :"+width);
+
+        console.log("Width is :"+$('.testBox').width());
+        console.log("Inner Width is :"+$('.testBox').innerWidth());
+        console.log("Outer Width is :"+$('.testBox').outerWidth());
+       
+    });
+
+    $('.heightbtn').on('click',function(){
+        console.log("Height is :"+$('.testBox').height());
+        console.log("InnerHeight is :"+$('.testBox').innerHeight());
+        console.log("Outer Heightis :"+$('.testBox').outerHeight());   
+    });
+
+   // Position(in accordance with relative parent) and offset(in accordance with absolute document)
+    console.log($('.testBox').position());
+    console.log($('.testBox').offset());
+
+// Scrolling methods
+    console.log($(document).scrollTop());
+    console.log($(document).scrollLeft());
+  });
+  </script>
+</body>
+</html>
